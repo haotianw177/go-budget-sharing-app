@@ -1,0 +1,1 @@
+Budget Sharing App made in Go
