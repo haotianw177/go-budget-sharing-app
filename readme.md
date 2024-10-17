@@ -1,6 +1,6 @@
 # Go budget sharing app 
 
-Go real time budget sharing app for[CSE 40842](https://www3.nd.edu/~pbui/teaching/cse.40842.fa24/project02.html)
+Go real time budget sharing app for [CSE 40842](https://www3.nd.edu/~pbui/teaching/cse.40842.fa24/project02.html). The app allow
 
 
 ## 1. install Go
