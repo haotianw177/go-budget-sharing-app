@@ -38,3 +38,22 @@ If your app has external dependencies, you'll need to download them. Run the fol
 
 ```bash
 go mod tidy
+```
+
+## 4. run the app
+
+open a terminal and type:
+
+    ```bash
+go run main.go
+
+    ```
+
+
+## 5. access the app locally
+
+open a browser window and type:
+```
+    http://localhost:8080
+
+```

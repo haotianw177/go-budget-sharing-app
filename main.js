@@ -1,7 +1,14 @@
 // haha
 
 // establish the real-time connection to the server
+
+// WSS (wss://) is the secure version of WebSockets, 
+// similar to how HTTPS is the secure version of HTTP. 
+// Browsers enforce that if a website is served over HTTPS, 
+// any WebSocket connections must also be secure (i.e., use wss://).
 let conn = new WebSocket("wss://" + window.location.host + "/ws");
+
+
 
 let expenseChart; // this will hold the chart showing expenses by category
 let categoryTotals = {}; // this keeps track of totals in each category
