@@ -50,7 +50,6 @@ go run main.go
 ## 5. access the app locally
 
 open a browser window and type:
-```
-    http://localhost:8080
-
+```bash
+http://localhost:8080
 ```
