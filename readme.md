@@ -1,6 +1,8 @@
 # Go budget sharing app 
 
-Go real time budget sharing app for [CSE 40842](https://www3.nd.edu/~pbui/teaching/cse.40842.fa24/project02.html). The app allow
+Go real time budget sharing app for [CSE 40842](https://www3.nd.edu/~pbui/teaching/cse.40842.fa24/project02.html). this full-stack web app is a real-time budget-sharing platform that allows users to track expenses, add new expenses, and visualize spending by category using a pie chart, with the ability to monitor and manage a shared budget collaboratively.
+
+the backend is build in Go to handle HTTP requests, manage WebSocket connections, and serve real-time budget updates for users. Javascript file manages client-side functionality, such as real-time communication with the Go backend via WebSockets, updating the expenses list, and to dynamically generating the pie chart using [Chart.js](https://www.chartjs.org/).
 
 the app is deployed through [Railway](https://railway.app/). you can see a live version [here](https://go-budget-sharing-app-production.up.railway.app/).
 
