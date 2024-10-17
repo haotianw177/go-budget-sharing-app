@@ -1,3 +1,4 @@
+/* Global Styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f7fa;
@@ -5,49 +6,59 @@ body {
   padding: 0;
   color: #333;
 }
-
 .container {
   max-width: 800px;
   margin: 40px auto;
   background-color: #fff;
-  padding: 20px 80px;
+  padding: 20px 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Add these styles to your existing CSS */
 
 /* Chart Container */
 .chart-container {
   position: relative;
   width: 100%;
+  max-width: 400px; /* Adjust the max width as needed */
   margin: 0 auto; /* Center the chart */
 }
 
+/* Adjust canvas to fit the container */
 #expenseChart {
-  width: 80% !important;
+  width: 100% !important;
   height: auto !important;
 }
 
 h1,
 h2 {
+  color: #333;
   text-align: center;
+  margin-top: 0;
 }
-
+h1 {
+  margin-bottom: 30px;
+}
+h2 {
+  margin-bottom: 20px;
+}
 p {
   font-size: 18px;
   margin: 10px 0;
 }
-
+strong {
+  color: #555;
+}
 /* Form Styles */
 #expenseForm {
   margin-top: 20px;
 }
-
 label {
   display: block;
   margin-top: 15px;
   font-weight: bold;
   font-size: 16px;
 }
-
 input[type="text"],
 input[type="number"] {
   width: 100%;
@@ -57,28 +68,26 @@ input[type="number"] {
   border-radius: 4px;
   font-size: 16px;
 }
-
 input[type="submit"] {
   margin-top: 25px;
   padding: 12px 20px;
-  background-color: blue;
+  background-color: #28a745;
+  color: #fff;
   border: none;
-  border-radius: 20px;
+  border-radius: 4px;
   font-size: 18px;
   cursor: pointer;
   width: 100%;
 }
-
 input[type="submit"]:hover {
   background-color: #218838;
 }
-
+/* Expenses List */
 #expensesList {
   list-style-type: none;
   padding: 0;
   margin: 20px 0;
 }
-
 #expensesList li {
   background-color: #fafafa;
   padding: 15px 20px;
@@ -86,25 +95,25 @@ input[type="submit"]:hover {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
+/* Notification Styles */
 #notifications {
   margin-top: 20px;
 }
-
 .notification {
-  color: #0000ff;
+  background-color: #fff3cd;
+  color: #856404;
   padding: 15px 20px;
   border-left: 6px solid #ffecb5;
   border-radius: 4px;
   margin-bottom: 20px;
 }
-
+/* Responsive Layout */
 @media (min-width: 768px) {
   .flex-container {
     display: flex;
     justify-content: space-between;
   }
   .flex-item {
-    width: 40%;
+    width: 48%;
   }
 }
