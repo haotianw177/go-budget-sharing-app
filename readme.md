@@ -1,4 +1,4 @@
-# go Budget Sharing App 
+# Go budget sharing app 
 
 This guide walks you through how to download, compile, and run the Go Budget Sharing App on your local machine.
 
@@ -10,9 +10,9 @@ to run the app, you'll need to have Go installed.
   
  After installation, open your terminal check for Go version to see if it's successfully installed
 
-    ```bash
-    go version
-    ```
+```bash
+go version
+```
 
 ## 2. clone the repository
 
@@ -45,8 +45,7 @@ go mod tidy
 open a terminal and type:
 
     ```bash
-go run main.go
-
+    go run main.go
     ```
 
 
