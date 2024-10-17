@@ -2,6 +2,7 @@
 
 Go real time budget sharing app for [CSE 40842](https://www3.nd.edu/~pbui/teaching/cse.40842.fa24/project02.html). The app allow
 
+the app is deployed through [Railway](https://railway.app/). you can see a live version [here](https://go-budget-sharing-app-production.up.railway.app/).
 
 ## 1. install Go
 
