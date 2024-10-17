@@ -1,7 +1,7 @@
 // haha
 
 // establish the real-time connection to the server
-let conn = new WebSocket("ws://" + window.location.host + "/ws");
+let conn = new WebSocket("wss://" + window.location.host + "/ws");
 
 let expenseChart; // this will hold the chart showing expenses by category
 let categoryTotals = {}; // this keeps track of totals in each category
