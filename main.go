@@ -1,19 +1,21 @@
 package main
 
 import (
-    "encoding/json"            //  working with JSON data
-    "fmt"                      //  printing messages to the console
-    "html/template"            // for generating HTML pages
-    "log"                      // for logging errors and information
-    "net/http"                 // for creating web servers
-    "sync"                     // for synchronizing data access
-    "github.com/gorilla/websocket" // for real-time communication
+    "encoding/json"            //   working with JSON data
+    "fmt"                      //     printing messages to the console
+    "html/template"            //   for generating HTML pages
+    "log"                      //    for logging errors and information
+    "net/http"                 //   for creating web servers
+    "sync"                     //   for synchronizing data access
+    "github.com/gorilla/websocket"    // for real-time communication
 )
 
 
 
 
-// data structure "Budget" represents the shared budget among users
+
+
+//   data structure "Budget" represents the shared budget among users
 type Budget struct {
     Name        string        // the name of the budget
     TotalAmount float64       // the total amount available
@@ -21,7 +23,7 @@ type Budget struct {
     Mutex       sync.Mutex    // a lock to prevent data conflicts
 }
 
-// expense represents a single expense entry
+// data structure "expsnse" represents a single expense entry
 type Expense struct {
     Description string  // what the expense was for
     Amount      float64 // how much was spent
@@ -32,23 +34,29 @@ type Expense struct {
 
 
 
+
 // global variables to manage templates, data, and connections
 var (
     templates    = template.Must(template.ParseFiles("./static/index.html")) // loads the HTML template
     budget       = Budget{Name: "Monthly Shared Budget", TotalAmount: 1000.0}       // initializes the budget
-    upgrader     = websocket.Upgrader{CheckOrigin: func(r *http.Request) bool { return true }} // Allows any connection
-    clients      = make(map[*websocket.Conn]bool) // Keeps track of connected users
-    clientsMutex sync.Mutex                       // Ensures safe access to clients
-    broadcast    = make(chan interface{})         // Channel for sending messages to clients
-    threshold    = 0.8                            // 80% threshold for budget warnings
+    upgrader     = websocket.Upgrader{CheckOrigin: func(r *http.Request) bool { return true }} // allows any connection
+    clients      = make(map[*websocket.Conn]bool) // keeps track of connected users
+    clientsMutex sync.Mutex                       // ensures safe access to clients
+    broadcast    = make(chan interface{})         // channel for sending messages to clients
+    threshold    = 0.8                            //    threshold for budget warnings
 )
+
+// seems like don't need it for vercel?>>>???
 
 func main() {
     // this is set up routes for different pages and actions
     http.HandleFunc("/", homeHandler)            // for home page
     http.HandleFunc("/ws", wsHandler)            // for WebSocket connection
     http.HandleFunc("/addExpense", addExpenseHandler) // for adding a new expense
+  
+
     http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(".")))) // for serving static files
+
 
     fmt.Println("Server started on :8080")       
     go handleMessages()                          // start handling real-time messages
@@ -61,95 +69,97 @@ func main() {
 
 // homeHandler serves the main page where users can see and add expenses
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-    budget.Mutex.Lock()                          // Lock the budget to prevent conflicts
-    defer budget.Mutex.Unlock()                  // Unlock after the function finishes
+    budget.Mutex.Lock()                          // lock the budget to prevent conflicts
+    defer budget.Mutex.Unlock()                  // unlock after the function finishes
 
-    // Prepare the data to display on the page
+    // prepare data to display on the page
     data := struct {
         Name          string
         TotalAmount   float64
         TotalExpenses float64
         Expenses      []Expense
     }{
-        Name:          budget.Name,               // Budget name
-        TotalAmount:   budget.TotalAmount,        // Total budget amount
-        TotalExpenses: calculateTotalExpenses(),  // Calculate total expenses
-        Expenses:      budget.Expenses,           // List of expenses
+        Name:          budget.Name,               
+        TotalAmount:   budget.TotalAmount,       
+        TotalExpenses: calculateTotalExpenses(),  
+        Expenses:      budget.Expenses,           // list of expenses
     }
 
-    // Generate the HTML page using the template and data
+    // generate HTML page using template and data
     err := templates.Execute(w, data)
     if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError) // Handle any errors
+        http.Error(w, err.Error(), http.StatusInternalServerError) 
     }
 }
 
-// wsHandler establishes a WebSocket connection for real-time updates
+// wsHandler establishes WebSocket connection for real-time updates
 func wsHandler(w http.ResponseWriter, r *http.Request) {
-    conn, err := upgrader.Upgrade(w, r, nil)     // Upgrade the HTTP connection to WebSocket
+    conn, err := upgrader.Upgrade(w, r, nil)     // upgrade the HTTP connection to WebSocket
     if err != nil {
         log.Println("WebSocket Upgrade Error:", err)
         return
     }
 
-    clientsMutex.Lock()                          // Lock the clients map
-    clients[conn] = true                         // Add the new client
-    clientsMutex.Unlock()                        // Unlock the clients map
+    clientsMutex.Lock()                          // lock the clients map
+    clients[conn] = true                         // add the new client
+    clientsMutex.Unlock()                        // unlock the clients map
 }
+
+
 
 // handleMessages listens for messages to send to clients
 func handleMessages() {
     for {
-        msg := <-broadcast                       // Wait for a message to broadcast
-        clientsMutex.Lock()                      // Lock the clients map
-        for client := range clients {            // Send the message to each client
-            err := client.WriteJSON(msg)         // Send the message as JSON
+        msg := <-broadcast                       // wait for a message to broadcast
+        clientsMutex.Lock()                      // lock the clients map
+        for client := range clients {            // send the message to each client
+            err := client.WriteJSON(msg)         // send the message as JSON
             if err != nil {
                 log.Printf("WebSocket Error: %v", err)
-                client.Close()                   // Close the connection if there's an error
-                delete(clients, client)          // Remove the client from the list
+                client.Close()                   // close the connection if there's an error
+                delete(clients, client)          // remove the client from the list
             }
         }
-        clientsMutex.Unlock()                    // Unlock the clients map
+        clientsMutex.Unlock()                    // now unlock the clients map
     }
 }
 
 // addExpenseHandler processes new expenses submitted by users
 func addExpenseHandler(w http.ResponseWriter, r *http.Request) {
-    if r.Method != http.MethodPost {             // Ensure the request is a POST
+    if r.Method != http.MethodPost {             // this ensure the request is a POST
         http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
         return
     }
 
     var expense Expense
-    err := json.NewDecoder(r.Body).Decode(&expense) // Read the expense from the request
+    err := json.NewDecoder(r.Body).Decode(&expense) // read the expense from the request
     if err != nil {
         http.Error(w, "Bad request", http.StatusBadRequest)
         return
     }
 
-    budget.Mutex.Lock()                          // Lock the budget data
-    budget.Expenses = append(budget.Expenses, expense) // Add the new expense
-    totalExpenses := calculateTotalExpenses()    // Update total expenses
-    categoryTotals := calculateCategoryTotals()  // Update totals by category
-    budget.Mutex.Unlock()                        // Unlock the budget data
+    budget.Mutex.Lock()                          // lock the budget data
+    budget.Expenses = append(budget.Expenses, expense) // add the new expense
+    totalExpenses := calculateTotalExpenses()    // update total expenses
+    categoryTotals := calculateCategoryTotals()  // update totals by category
+    budget.Mutex.Unlock()                        // unlock the budget data
 
-    // Prepare the message to send to clients
+    // prepare the message to send to clients
     msg := struct {
         Type           string
         Data           Expense
         TotalExpenses  float64
         CategoryTotals map[string]float64
     }{
-        Type:           "Expense",               // Message type
-        Data:           expense,                 // The new expense
-        TotalExpenses:  totalExpenses,           // Updated total expenses
-        CategoryTotals: categoryTotals,          // Updated category totals
+        Type:           "Expense",               // message type
+        Data:           expense,                 // the new expense
+        TotalExpenses:  totalExpenses,           // updated total expenses
+        CategoryTotals: categoryTotals,          // updated category totals
     }
 
-    broadcast <- msg                             // Send the message to all clients
+    broadcast <- msg                             // send the message to all clients
 
-    // Check if expenses exceed the threshold
+    // check if expenses exceed the threshold
     if totalExpenses > threshold*budget.TotalAmount {
         notification := struct {
             Type    string
@@ -158,10 +168,10 @@ func addExpenseHandler(w http.ResponseWriter, r *http.Request) {
             Type:    "Notification",
             Message: fmt.Sprintf("Budget threshold of %.0f%% exceeded!", threshold*100),
         }
-        broadcast <- notification                // Send a warning to all clients
+        broadcast <- notification                // send a warning to all clients
     }
 
-    // Respond to the user's request indicating success
+    // respond to the user's request indicating success
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
