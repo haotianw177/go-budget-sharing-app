@@ -10,7 +10,7 @@ to run the app, you'll need to have Go installed.
 
 - **download Go**: visit the [Go offcial download page](https://golang.org/dl/) and download the latest stable version for your OS.
   
- After installation, open your terminal check for Go version to see if it's successfully installed
+after installation, open your terminal check for Go version to see if it's successfully installed
 
 ```bash
 go version
@@ -23,10 +23,8 @@ to get the source code for the app, clone the repository from GitHub:
 - **clone the repo**: open you terminal and run:
 
     ```bash
-    git clone <repo-url>
+    git clone https://github.com/haotianw177/go-budget-sharing-app
     ```
-
-    replace `<repo-url>` with the URL of the repository (EX: `https://github.com/your-username/go-budget-sharing-app.git`).
 
 - **navigate to the project directory**:
 
