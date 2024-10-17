@@ -43,11 +43,9 @@ go mod tidy
 ## 4. run the app
 
 open a terminal and type:
-
-    ```bash
-    go run main.go
-    ```
-
+```bash
+go run main.go
+```
 
 ## 5. access the app locally
 
