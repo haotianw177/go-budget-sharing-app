@@ -2,41 +2,37 @@
 
 This guide walks you through how to download, compile, and run the Go Budget Sharing App on your local machine.
 
-## 1. Install Go
+## 1. install Go
 
 to run the app, you'll need to have Go installed.
 
-- **Download Go**: cisit the [Go offcial download page](https://golang.org/dl/) and download the latest stable version for your operating system.
+- **download Go**: vsit the [Go offcial download page](https://golang.org/dl/) and download the latest stable version for your OS.
   
-- **Install Go**: Follow the installation instructions for your OS (macOS, Windows, or Linux).
-
-- **Verify Installation**: After installation, open your terminal and run the following command to check if Go is properly installed:
+ After installation, open your terminal check for Go version to see if it's successfully installed
 
     ```bash
     go version
     ```
 
-    You should see the Go version output, indicating that Go is installed.
+## 2. clone the repository
 
-## 2. Clone the Repository
+to get the source code for the app, clone the repository from GitHub:
 
-To get the source code for the app, clone the repository from GitHub:
-
-- **Clone the Repo**: Open a terminal and run:
+- **clone the repo**: open you terminal and run:
 
     ```bash
     git clone <repo-url>
     ```
 
-    Replace `<repo-url>` with the URL of the repository (for example, `https://github.com/your-username/go-budget-sharing-app.git`).
+    replace `<repo-url>` with the URL of the repository (EX: `https://github.com/your-username/go-budget-sharing-app.git`).
 
-- **Navigate to the Project Directory**:
+- **navigate to the project directory**:
 
     ```bash
     cd go-budget-sharing-app
     ```
 
-## 3. Install Dependencies
+## 3. install dependencies
 
 If your app has external dependencies, you'll need to download them. Run the following command in the terminal:
 
