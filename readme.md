@@ -1,12 +1,13 @@
 # Go budget sharing app 
 
-This guide walks you through how to download, compile, and run the Go Budget Sharing App on your local machine.
+Go real time budget sharing app for[CSE 40842](https://www3.nd.edu/~pbui/teaching/cse.40842.fa24/project02.html)
+
 
 ## 1. install Go
 
 to run the app, you'll need to have Go installed.
 
-- **download Go**: vsit the [Go offcial download page](https://golang.org/dl/) and download the latest stable version for your OS.
+- **download Go**: visit the [Go offcial download page](https://golang.org/dl/) and download the latest stable version for your OS.
   
  After installation, open your terminal check for Go version to see if it's successfully installed
 
