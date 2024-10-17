@@ -10,8 +10,7 @@
   <body>
     <div class="container">
       <h1>{{.Name}}</h1>
-      <div class="flex-container">
-        <div class="flex-item">
+        <div class="expenseInput">
           <p><strong>Total Budget:</strong> ${{printf "%.2f" .TotalAmount}}</p>
           <p>
             <strong>Total Expenses:</strong> $<span id="totalExpenses"
@@ -28,7 +27,7 @@
             {{end}}
           </ul>
         </div>
-        <div class="flex-item">
+        <div class="expenseInput">
           <h2>Add Expense</h2>
           <form id="expenseForm">
             <label for="user">User:</label>
@@ -57,7 +56,6 @@
             </select>
             <input type="submit" value="Add Expense" />
           </form>
-        </div>
       </div>
       <h2>Spending by Category</h2>
       <canvas id="expenseChart"></canvas>

@@ -77,13 +77,13 @@ function updateChart() {
   } else {
     // If the chart doesn't exist, create it
     expenseChart = new Chart(ctx, {
-      type: "pie", // We're making a pie chart
+      type: "pie",
       data: {
-        labels: categories, // Categories on the chart
+        labels: categories, 
         datasets: [{ data: amounts, backgroundColor: colors }],
       },
       options: {
-        responsive: true, // Makes the chart resize with the window
+        responsive: true, 
       },
     });
   }

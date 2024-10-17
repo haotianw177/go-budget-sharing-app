@@ -44,16 +44,20 @@ var (
 )
 
 func main() {
-    // Set up routes for different pages and actions
-    http.HandleFunc("/", homeHandler)            // Home page
-    http.HandleFunc("/ws", wsHandler)            // WebSocket connection
-    http.HandleFunc("/addExpense", addExpenseHandler) // Adding a new expense
-    http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(".")))) // Serving static files
+    // this is set up routes for different pages and actions
+    http.HandleFunc("/", homeHandler)            // for home page
+    http.HandleFunc("/ws", wsHandler)            // for WebSocket connection
+    http.HandleFunc("/addExpense", addExpenseHandler) // for adding a new expense
+    http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(".")))) // for serving static files
 
-    fmt.Println("Server started on :8080")       // Inform that the server is running
-    go handleMessages()                          // Start handling real-time messages
-    log.Fatal(http.ListenAndServe(":8080", nil)) // Start the web server on port 8080
+    fmt.Println("Server started on :8080")       
+    go handleMessages()                          // start handling real-time messages
+    log.Fatal(http.ListenAndServe(":8080", nil)) // start server on port 8080
 }
+
+
+
+
 
 // homeHandler serves the main page where users can see and add expenses
 func homeHandler(w http.ResponseWriter, r *http.Request) {
