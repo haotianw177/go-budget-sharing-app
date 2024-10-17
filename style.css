@@ -14,7 +14,6 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Add these styles to your existing CSS */
 
 /* Chart Container */
 .chart-container {
@@ -71,7 +70,7 @@ input[type="number"] {
 input[type="submit"] {
   margin-top: 25px;
   padding: 12px 20px;
-  background-color: #28a745;
+  background-color: #0000ff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -80,7 +79,7 @@ input[type="submit"] {
   width: 100%;
 }
 input[type="submit"]:hover {
-  background-color: #218838;
+  background-color: #0000aa;
 }
 /* Expenses List */
 #expensesList {

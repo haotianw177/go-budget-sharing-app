@@ -67,7 +67,7 @@ function updateChart() {
   const ctx = document.getElementById("expenseChart").getContext("2d"); // Get the drawing area
   const categories = Object.keys(categoryTotals); // Get the names of the categories
   const amounts = Object.values(categoryTotals); // Get the amounts spent in each category
-  const colors = ["#4dc9f6", "#f67019", "#f53794", "#537bc4", "#acc236"]; // Colors for the chart
+  const colors = ["#4dc9f6", "#f67019", "#f53794", "#537bc4", "#acc236", "#0000ff", "#00ff00"]; // Colors for the chart
 
   if (expenseChart) {
     // If the chart already exists, update it
